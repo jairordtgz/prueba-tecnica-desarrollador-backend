@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import viewsets
 
 from .filters import FiltroCliente
@@ -10,7 +9,7 @@ class ClienteViewSet(viewsets.ModelViewSet):
     serializer_class = ClienteSerializer
     filterset_class = FiltroCliente
 
-    def eliminar_registro(self, instance):
+    def perform_destroy(self, instance):
         # Eliminación lógica: nunca se borra el registro físicamente.
         instance.is_active = False
         instance.save(update_fields=['is_active'])

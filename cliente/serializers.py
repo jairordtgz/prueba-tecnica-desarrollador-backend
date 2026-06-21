@@ -12,7 +12,7 @@ class ClienteSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ['id', 'created_at', 'modified_at']
 
-    def validar_identificacion(self, value):
+    def validate_identificacion(self, value):
         value = value.strip()
         if not value:
             raise serializers.ValidationError('La identificación no puede estar vacía.')

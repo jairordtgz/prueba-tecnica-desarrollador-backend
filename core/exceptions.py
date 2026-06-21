@@ -9,7 +9,7 @@ def excepcion_personalizada(exc, contexto):
     if response is not None: 
         return response
     
-    if isinstance(exc, contexto): 
+    if isinstance(exc, IntegrityError): 
         return Response(
             {'detail': 'Conflicto en los datos'},
             status=status.HTTP_409_CONFLICT

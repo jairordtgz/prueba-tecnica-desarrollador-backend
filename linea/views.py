@@ -10,6 +10,6 @@ class LineaServicioViewSet(viewsets.ModelViewSet):
     serializer_class = LineaServicioSerializer
     filterset_class = FiltroLineaServicio
 
-    def eliminar_registro(self, instance):
+    def perform_destroy(self, instance):
         instance.is_active = False
-        instance.save(update_fields=['is_active'])
+        instance.save(update_fields=['is_active'])     
