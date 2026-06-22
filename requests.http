@@ -1,0 +1,96 @@
+@baseUrl = http://127.0.0.1:8000/api
+@username = admin
+@password = TU_PASSWORD_AQUI
+
+### Obtener token
+POST {{baseUrl}}/auth/token/
+Content-Type: application/x-www-form-urlencoded
+
+username={{username}}&password={{password}}
+
+### Health check
+GET {{baseUrl}}/health/
+
+### Métricas básicas
+GET {{baseUrl}}/metrics/
+
+### --- CLIENTES ---
+
+### Listar clientes
+GET {{baseUrl}}/clientes/
+Authorization: Token PEGA_TU_TOKEN_AQUI
+
+### Filtrar clientes por identificacion
+GET {{baseUrl}}/clientes/?identificacion=0903
+Authorization: Token PEGA_TU_TOKEN_AQUI
+
+### Crear cliente
+POST {{baseUrl}}/clientes/
+Authorization: Token PEGA_TU_TOKEN_AQUI
+Content-Type: application/json
+
+{
+  "identificacion": "0903369387",
+  "razon_social": "Juan Pérez",
+  "email": "juan@example.com",
+  "celular": "0991234567"
+}
+
+### Detalle de cliente
+GET {{baseUrl}}/clientes/1/
+Authorization: Token PEGA_TU_TOKEN_AQUI
+
+### Actualizar parcialmente cliente
+PATCH {{baseUrl}}/clientes/1/
+Authorization: Token PEGA_TU_TOKEN_AQUI
+Content-Type: application/json
+
+{
+  "celular": "0987654321"
+}
+
+### Eliminar cliente (soft delete, requiere admin)
+DELETE {{baseUrl}}/clientes/1/
+Authorization: Token PEGA_TU_TOKEN_AQUI
+
+### --- LINEAS ---
+
+### Listar líneas
+GET {{baseUrl}}/lineas/
+Authorization: Token PEGA_TU_TOKEN_AQUI
+
+### Filtrar líneas por cliente y estado
+GET {{baseUrl}}/lineas/?cliente_id=1&estado_linea=ACTIVO
+Authorization: Token PEGA_TU_TOKEN_AQUI
+
+### Crear línea
+POST {{baseUrl}}/lineas/
+Authorization: Token PEGA_TU_TOKEN_AQUI
+Content-Type: application/json
+
+{
+  "cliente": 1,
+  "linea_numero": 1,
+  "estado_linea": "NO_INSTALADO"
+}
+
+### Detalle de línea
+GET {{baseUrl}}/lineas/1/
+Authorization: Token PEGA_TU_TOKEN_AQUI
+
+### Activar línea (falla si el cliente está inactivo)
+PATCH {{baseUrl}}/lineas/1/
+Authorization: Token PEGA_TU_TOKEN_AQUI
+Content-Type: application/json
+
+{
+  "estado_linea": "ACTIVO"
+}
+
+### Estado de cobranza de una línea
+GET {{baseUrl}}/lineas/1/estado-cobranza/
+Authorization: Token PEGA_TU_TOKEN_AQUI
+
+### Eliminar línea (soft delete, requiere admin)
+DELETE {{baseUrl}}/lineas/1/
+Authorization: Token PEGA_TU_TOKEN_AQUI
